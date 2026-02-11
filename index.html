@@ -38,14 +38,14 @@
     }
 
     .box {
-        background: white;
-        padding: 40px;
-        border-radius: 25px;
-        box-shadow: 0 15px 35px rgba(0,0,0,0.25);
-        position: relative;
-        z-index: 10;
+    background: white;
+    padding: 40px;
+    border-radius: 25px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+    position: relative;
+    z-index: 10;
+    overflow: hidden; /* important */
     }
-
     h1 {
         color: #ff4d6d;
         font-size: 2.7rem;
@@ -114,21 +114,26 @@
     const message = document.getElementById("message");
 
     // NO button runs away
+    const box = document.querySelector(".box");
+
     noBtn.addEventListener("mouseover", () => {
-    const padding = 20; // keeps it away from edges
+        const padding = 10;
 
-    const btnWidth = noBtn.offsetWidth;
-    const btnHeight = noBtn.offsetHeight;
+        const boxRect = box.getBoundingClientRect();
 
-    const maxX = window.innerWidth - btnWidth - padding;
-    const maxY = window.innerHeight - btnHeight - padding;
+        const btnWidth = noBtn.offsetWidth;
+        const btnHeight = noBtn.offsetHeight;
 
-    const x = Math.random() * maxX;
-    const y = Math.random() * maxY;
+        const maxX = boxRect.width - btnWidth - padding;
+        const maxY = boxRect.height - btnHeight - padding;
 
-    noBtn.style.left = x + "px";
-    noBtn.style.top = y + "px";
+        const x = Math.random() * maxX;
+        const y = Math.random() * maxY;
+
+        noBtn.style.left = x + "px";
+        noBtn.style.top = y + "px";
     });
+
 
     yesBtn.addEventListener("click", () => {
     message.innerHTML = "YAYYY THANK YOU FOR Saying YESSS 🥰💍💖";
@@ -173,5 +178,6 @@
 
 </body>
 </html>
+
 
 
